@@ -104,9 +104,13 @@ const Login = () => {
 
 			// valida si encontro el token
 
-			if (!cookies.get('token')) {
-				throw "Error: Token no existe";
-			}
+			//  console.log('---------------');
+			//  console.log(cookies.get('token'));
+			//  console.log('---------------');
+
+			 if (!cookies.get('token')) {
+			 	throw "Error: Token no existe";
+			 }
 
 			let _body = { Accion: "BUSCARREGISTRO", Sgm_cUsuario: username, Sgm_cContrasena: md5(password) }
 			let _result;
@@ -115,6 +119,7 @@ const Login = () => {
 			await eventoService.obtenerUsuario(_body).then(
 
 				(res) => {
+
 					setLogeo(res[0]);
 					_result = res[0];
 				},

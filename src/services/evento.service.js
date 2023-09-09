@@ -124,7 +124,7 @@ function obtenerCatalogo(dataJson) {
 }
 
 function obtenerVideos(dataJson) {
-  const apiUrl = 'https://fq2f3c40a4.execute-api.us-east-2.amazonaws.com/dev/lgn_videoteca';
+  const apiUrl = 'https://fq2f3c40a4.execute-api.us-east-2.amazonaws.com/dev/lgm_videoteca';
   const headers = authHeader();
   return axios.post(apiUrl, dataJson, { headers }).then(res => 
       res.data
@@ -157,23 +157,25 @@ function obtenerUsuario(dataJson) {
 }
 
 function obtenerToken(dataJson) {
-  const options = { headers: authHeader(), body: JSON.stringify(dataJson) };
-  const params = {};
-
-  const url = `/api/evento/auth`;
-  return Fetch.post(url, params, options).then((res) =>
-    handleResponse(res, false)
-  );
+  const apiUrl = 'https://fq2f3c40a4.execute-api.us-east-2.amazonaws.com/dev/token';
+  const headers = authHeader();
+  return axios.post(apiUrl, dataJson, { headers }).then(res => 
+      res.data
+    )
+    .catch(error => {
+      console.error('Error al hacer la solicitud:' + apiUrl, error);
+    });
 }
 
 function horaservidor(dataJson) {
-  const options = { headers: authHeader(), body: JSON.stringify(dataJson) };
-  const params = {};
-
-  const url = `/api/evento/time`;
-  return Fetch.post(url, params, options).then((res) =>
-    handleResponse(res, false)
-  );
+  const apiUrl = 'https://fq2f3c40a4.execute-api.us-east-2.amazonaws.com/dev/time';
+  const headers = authHeader();
+  return axios.post(apiUrl, dataJson, { headers }).then(res => 
+      res.data
+    )
+    .catch(error => {
+      console.error('Error al hacer la solicitud:' + apiUrl, error);
+    });
 }
 
 
@@ -235,7 +237,7 @@ function obtenerCatalogoAuth(dataJson) {
 }
 
 function obtenerVideosAuth(dataJson) {
-  const apiUrl = 'https://fq2f3c40a4.execute-api.us-east-2.amazonaws.com/dev/lgn_videoteca';
+  const apiUrl = 'https://fq2f3c40a4.execute-api.us-east-2.amazonaws.com/dev/lgm_videoteca';
   const headers = authHeader();
   return axios.post(apiUrl, dataJson, { headers }).then(res => 
       res.data
