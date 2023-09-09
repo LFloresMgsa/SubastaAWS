@@ -7,7 +7,7 @@ export function authHeader(isMultiPart, newToken) {
 
 
   try {
-    const Token = cookies.get('token');
+    const Token ='AWS1q2w3e4r5t.';// cookies.get('token');
 /*
 
     console.log('----------------------');
@@ -18,20 +18,21 @@ export function authHeader(isMultiPart, newToken) {
 
       return {
         'Content-type': 'application/json',
-        'x-auth-token': `${Token}`,
+        'authorizationToken': `${Token}`,
       };
     } else {
       return {
         'Content-type': 'application/json',
-        'x-auth-token': 'error',
+        'authorizationToken': 'error',
       };
     }
   } catch (error) {
     return {
       'Content-type': 'application/json',
-      'x-auth-token': 'error',
+      'authorizationToken': 'error',
     };
   }
 
 
 }
+

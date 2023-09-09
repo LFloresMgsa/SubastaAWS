@@ -82,10 +82,9 @@ const Subasta = (props) => {
   const obtenerSubastaactual = async () => {
     let _body = { Accion: "EVENTOABIERTO", Emp_cCodigo: storage.GetStorage("Emp_cCodigo"), Pan_cAnio: storage.GetStorage("Pan_cAnio") }
 
-    console.log('obtenerSubastaactual');
-
     return await eventoService.obtenerEventosCab(_body).then(
       (res) => {
+        
         setSubastasActual(res[0]);
       },
       (error) => {

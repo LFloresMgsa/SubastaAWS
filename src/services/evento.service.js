@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 
 import { Try } from '@mui/icons-material';
 import { authHeader, handleResponse } from '../helpers';
@@ -45,105 +47,113 @@ function GrabarPedido(dataJson) {
 
 // SERVICIOS SIN AUTORIZACION
 function obtenerEventosCab(dataJson) {
-  const options = { headers: authHeader(), body: JSON.stringify(dataJson) };
-  const params = {};
-
-  const url = `/api/evento/vtm_evento`;
-  return Fetch.post(url, params, options).then((res) =>
-    handleResponse(res, false)
-  );
+  const apiUrl = 'https://fq2f3c40a4.execute-api.us-east-2.amazonaws.com/dev/vtm_evento';
+  const headers = authHeader();
+  return axios.post(apiUrl, dataJson, { headers }).then(res => 
+      res.data
+    )
+    .catch(error => {
+      console.error('Error al hacer la solicitud:' + apiUrl, error);
+    });
 }
-
+ 
 function obtenerEventosDet(dataJson) {
-  const options = { headers: authHeader(), body: JSON.stringify(dataJson) };
-  const params = {};
-
-  const url = `/api/evento/vtd_evento`;
-  return Fetch.post(url, params, options).then((res) =>
-    handleResponse(res, false)
-  );
+  const apiUrl = 'https://fq2f3c40a4.execute-api.us-east-2.amazonaws.com/dev/vtd_evento';
+  const headers = authHeader();
+  return axios.post(apiUrl, dataJson, { headers }).then(res => 
+      res.data
+    )
+    .catch(error => {
+      console.error('Error al hacer la solicitud:' + apiUrl, error);
+    });
 }
 
 function obtenerPedidoCab(dataJson) {
-  const options = { headers: authHeader(), body: JSON.stringify(dataJson) };
-  const params = {};
-
-  const url = `/api/evento/vtm_pedido`;
-  return Fetch.post(url, params, options).then((res) =>
-    handleResponse(res, false)
-  );
+  const apiUrl = 'https://fq2f3c40a4.execute-api.us-east-2.amazonaws.com/dev/vtm_pedido';
+  const headers = authHeader();
+  return axios.post(apiUrl, dataJson, { headers }).then(res => 
+      res.data
+    )
+    .catch(error => {
+      console.error('Error al hacer la solicitud:' + apiUrl, error);
+    });
 }
 
 function obtenerPedidoDet(dataJson) {
-  const options = { headers: authHeader(), body: JSON.stringify(dataJson) };
-  const params = {};
-
-  const url = `/api/evento/vtd_pedido`;
-  return Fetch.post(url, params, options).then((res) =>
-    handleResponse(res, false)
-  );
+  const apiUrl = 'https://fq2f3c40a4.execute-api.us-east-2.amazonaws.com/dev/vtd_pedido';
+  const headers = authHeader();
+  return axios.post(apiUrl, dataJson, { headers }).then(res => 
+      res.data
+    )
+    .catch(error => {
+      console.error('Error al hacer la solicitud:' + apiUrl, error);
+    });
 }
 
-
 function obtenerEventosDetPuja(dataJson) {
-  const options = { headers: authHeader(), body: JSON.stringify(dataJson) };
-  const params = {};
-
-  const url = `/api/evento/vtd_evento_puja`;
-  return Fetch.post(url, params, options).then((res) =>
-    handleResponse(res, false)
-  );
+  const apiUrl = 'https://fq2f3c40a4.execute-api.us-east-2.amazonaws.com/dev/vtd_evento_puja';
+  const headers = authHeader();
+  return axios.post(apiUrl, dataJson, { headers }).then(res => 
+      res.data
+    )
+    .catch(error => {
+      console.error('Error al hacer la solicitud:' + apiUrl, error);
+    });
 }
 
 function obtenerCatalogoDetImagenes(dataJson) {
-  const options = { headers: authHeader(), body: JSON.stringify(dataJson) };
-  const params = {};
-
-  const url = `/api/evento/lgd_catalogo_imagenes`;
-  return Fetch.post(url, params, options).then((res) =>
-    handleResponse(res, false)
-  );
+  const apiUrl = 'https://fq2f3c40a4.execute-api.us-east-2.amazonaws.com/dev/lgd_catalogo_imagenes';
+  const headers = authHeader();
+  return axios.post(apiUrl, dataJson, { headers }).then(res => 
+      res.data
+    )
+    .catch(error => {
+      console.error('Error al hacer la solicitud:' + apiUrl, error);
+    });
 }
 
 function obtenerCatalogo(dataJson) {
-  const options = { headers: authHeader(), body: JSON.stringify(dataJson) };
-  const params = {};
-
-  const url = `/api/evento/lgm_catalogo_bs`;
-  return Fetch.post(url, params, options).then((res) =>
-    handleResponse(res, false)
-  );
+  const apiUrl = 'https://fq2f3c40a4.execute-api.us-east-2.amazonaws.com/dev/lgm_catalogo_bs';
+  const headers = authHeader();
+  return axios.post(apiUrl, dataJson, { headers }).then(res => 
+      res.data
+    )
+    .catch(error => {
+      console.error('Error al hacer la solicitud:' + apiUrl, error);
+    });
 }
 
 function obtenerVideos(dataJson) {
-  const options = { headers: authHeader(), body: JSON.stringify(dataJson) };
-  const params = {};
-
-  const url = `/api/evento/lgm_videoteca`;
-  return Fetch.post(url, params, options).then((res) =>
-    handleResponse(res, false)
-  );
+  const apiUrl = 'https://fq2f3c40a4.execute-api.us-east-2.amazonaws.com/dev/lgn_videoteca';
+  const headers = authHeader();
+  return axios.post(apiUrl, dataJson, { headers }).then(res => 
+      res.data
+    )
+    .catch(error => {
+      console.error('Error al hacer la solicitud:' + apiUrl, error);
+    });
 }
 
 function obtenerImagenes(dataJson) {
-  const options = { headers: authHeader(), body: JSON.stringify(dataJson) };
-  const params = {};
-
-  const url = `/api/evento/lgm_imagenes`;
-  return Fetch.post(url, params, options).then((res) =>
-    handleResponse(res, false)
-  );
+  const apiUrl = 'https://fq2f3c40a4.execute-api.us-east-2.amazonaws.com/dev/lgm_imagenes';
+  const headers = authHeader();
+  return axios.post(apiUrl, dataJson, { headers }).then(res => 
+      res.data
+    )
+    .catch(error => {
+      console.error('Error al hacer la solicitud:' + apiUrl, error);
+    });
 }
 
-
 function obtenerUsuario(dataJson) {
-  const options = { headers: authHeader(), body: JSON.stringify(dataJson) };
-  const params = {};
-
-  const url = `/api/evento/sgm_usuarios`;
-  return Fetch.post(url, params, options).then((res) =>
-    handleResponse(res, false)
-  );
+  const apiUrl = 'https://fq2f3c40a4.execute-api.us-east-2.amazonaws.com/dev/sgm_usuarios';
+  const headers = authHeader();
+  return axios.post(apiUrl, dataJson, { headers }).then(res => 
+      res.data
+    )
+    .catch(error => {
+      console.error('Error al hacer la solicitud:' + apiUrl, error);
+    });
 }
 
 function obtenerToken(dataJson) {
@@ -170,86 +180,92 @@ function horaservidor(dataJson) {
 // SERVICIOS CON AUTORIZACION
 
 function obtenerEventosCabAuth(dataJson) {
-  const options = { headers: authHeader(), body: JSON.stringify(dataJson) };
-  const params = {};
-
-  const url = `/api/evento/vtm_evento/auth`;
-  return Fetch.post(url, params, options).then((res) =>
-    handleResponse(res, false)
-  );
+  const apiUrl = 'https://fq2f3c40a4.execute-api.us-east-2.amazonaws.com/dev/vtm_evento';
+  const headers = authHeader();
+  return axios.post(apiUrl, dataJson, { headers }).then(res => 
+      res.data
+    )
+    .catch(error => {
+      console.error('Error al hacer la solicitud:' + apiUrl, error);
+    });
 }
 
 function obtenerEventosDetAuth(dataJson) {
-  const options = { headers: authHeader(), body: JSON.stringify(dataJson) };
-  const params = {};
-
-  const url = `/api/evento/vtd_evento/auth`;
-  return Fetch.post(url, params, options).then((res) =>
-    handleResponse(res, false)
-  );
+  const apiUrl = 'https://fq2f3c40a4.execute-api.us-east-2.amazonaws.com/dev/vtd_evento';
+  const headers = authHeader();
+  return axios.post(apiUrl, dataJson, { headers }).then(res => 
+      res.data
+    )
+    .catch(error => {
+      console.error('Error al hacer la solicitud:' + apiUrl, error);
+    });
 }
 
 function obtenerEventosDetPujaAuth(dataJson) {
-  const options = { headers: authHeader(), body: JSON.stringify(dataJson) };
-  const params = {};
-
-  const url = `/api/evento/vtd_evento_puja/auth`;
-  return Fetch.post(url, params, options).then((res) =>
-    handleResponse(res, false)
-  );
+  const apiUrl = 'https://fq2f3c40a4.execute-api.us-east-2.amazonaws.com/dev/vtd_evento_puja';
+  const headers = authHeader();
+  return axios.post(apiUrl, dataJson, { headers }).then(res => 
+      res.data
+    )
+    .catch(error => {
+      console.error('Error al hacer la solicitud:' + apiUrl, error);
+    });
 }
 
 function obtenerCatalogoDetImagenesAuth(dataJson) {
-  const options = { headers: authHeader(), body: JSON.stringify(dataJson) };
-  const params = {};
-
-  const url = `/api/evento/lgd_catalogo_imagenes/auth`;
-  return Fetch.post(url, params, options).then((res) =>
-    handleResponse(res, false)
-  );
+  const apiUrl = 'https://fq2f3c40a4.execute-api.us-east-2.amazonaws.com/dev/lgd_catalogo_imagenes';
+  const headers = authHeader();
+  return axios.post(apiUrl, dataJson, { headers }).then(res => 
+      res.data
+    )
+    .catch(error => {
+      console.error('Error al hacer la solicitud:' + apiUrl, error);
+    });
 }
 
 function obtenerCatalogoAuth(dataJson) {
-
-  const options = { headers: authHeader(), body: JSON.stringify(dataJson) };
-  const params = {};
-
-  const url = `/api/evento/lgm_catalogo_bs/auth`;
-  return Fetch.post(url, params, options).then((res) =>
-    handleResponse(res, false)
-  );
+  const apiUrl = 'https://fq2f3c40a4.execute-api.us-east-2.amazonaws.com/dev/lgm_catalogo_bs';
+  const headers = authHeader();
+  return axios.post(apiUrl, dataJson, { headers }).then(res => 
+      res.data
+    )
+    .catch(error => {
+      console.error('Error al hacer la solicitud:' + apiUrl, error);
+    });
 }
 
 function obtenerVideosAuth(dataJson) {
-  const options = { headers: authHeader(), body: JSON.stringify(dataJson) };
-  const params = {};
-
-  const url = `/api/evento/lgm_videoteca/auth`;
-  return Fetch.post(url, params, options).then((res) =>
-    handleResponse(res, false)
-  );
+  const apiUrl = 'https://fq2f3c40a4.execute-api.us-east-2.amazonaws.com/dev/lgn_videoteca';
+  const headers = authHeader();
+  return axios.post(apiUrl, dataJson, { headers }).then(res => 
+      res.data
+    )
+    .catch(error => {
+      console.error('Error al hacer la solicitud:' + apiUrl, error);
+    });
 }
 
 function obtenerPedidoCabAuth(dataJson) {
-  const options = { headers: authHeader(), body: JSON.stringify(dataJson) };
-  const params = {};
-
-  const url = `/api/evento/vtm_pedido/auth`;
-  return Fetch.post(url, params, options).then((res) =>
-    handleResponse(res, false)
-  );
+  const apiUrl = 'https://fq2f3c40a4.execute-api.us-east-2.amazonaws.com/dev/vtm_pedido';
+  const headers = authHeader();
+  return axios.post(apiUrl, dataJson, { headers }).then(res => 
+      res.data
+    )
+    .catch(error => {
+      console.error('Error al hacer la solicitud:' + apiUrl, error);
+    });
 }
 
 function obtenerPedidoDetAuth(dataJson) {
-  const options = { headers: authHeader(), body: JSON.stringify(dataJson) };
-  const params = {};
-
-  const url = `/api/evento/vtd_pedido/auth`;
-  return Fetch.post(url, params, options).then((res) =>
-    handleResponse(res, false)
-  );
+  const apiUrl = 'https://fq2f3c40a4.execute-api.us-east-2.amazonaws.com/dev/vtd_pedido';
+  const headers = authHeader();
+  return axios.post(apiUrl, dataJson, { headers }).then(res => 
+      res.data
+    )
+    .catch(error => {
+      console.error('Error al hacer la solicitud:' + apiUrl, error);
+    });
 }
-
 
 function obtenerAccesosAuth(dataJson) {
   const options = { headers: authHeader(), body: JSON.stringify(dataJson) };
@@ -261,12 +277,11 @@ function obtenerAccesosAuth(dataJson) {
   );
 }
 
-
 function actualizaPedidoAuth(dataJson) {
   const options = { headers: authHeader(), body: JSON.stringify(dataJson) };
   const params = {};
 
-  const url = `/api/evento/vtm_pedido_estados/auth`; 
+  const url = `/api/evento/vtm_pedido_estados/auth`;
   return Fetch.post(url, params, options).then((res) =>
     handleResponse(res, false)
   );
