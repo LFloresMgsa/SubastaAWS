@@ -36,13 +36,14 @@ export const eventoService = {
 // SERVICIOS SIN AUTORIZACION
 
 function GrabarPedido(dataJson) {
-  const options = { headers: authHeader(), body: JSON.stringify(dataJson) };
-  const params = {};
-
-  const url = `/api/evento/FinalizarCompra`;
-  return Fetch.post(url, params, options).then((res) =>
-    handleResponse(res, false)
-  );
+  const apiUrl = 'https://fq2f3c40a4.execute-api.us-east-2.amazonaws.com/dev/finalizarcompra';
+  const headers = authHeader();
+  return axios.post(apiUrl, dataJson, { headers }).then(res => 
+      res.data
+    )
+    .catch(error => {
+      console.error('Error al hacer la solicitud:' + apiUrl, error);
+    });
 }
 
 // SERVICIOS SIN AUTORIZACION
@@ -280,12 +281,13 @@ function obtenerAccesosAuth(dataJson) {
 }
 
 function actualizaPedidoAuth(dataJson) {
-  const options = { headers: authHeader(), body: JSON.stringify(dataJson) };
-  const params = {};
-
-  const url = `/api/evento/vtm_pedido_estados/auth`;
-  return Fetch.post(url, params, options).then((res) =>
-    handleResponse(res, false)
-  );
+  const apiUrl = 'https://fq2f3c40a4.execute-api.us-east-2.amazonaws.com/dev/vtm_pedido_estados';
+  const headers = authHeader();
+  return axios.post(apiUrl, dataJson, { headers }).then(res => 
+      res.data
+    )
+    .catch(error => {
+      console.error('Error al hacer la solicitud:' + apiUrl, error);
+    });
 }
 
