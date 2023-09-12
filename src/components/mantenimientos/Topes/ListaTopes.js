@@ -78,7 +78,7 @@ const ListaTopes = (props) => {
 
   // procedimiento para CONSULTA un catalogo con SP MySQL
   const listarCabeceraEventos = async () => {
-    let _body = { Accion: "BUSCARTODOS", Emp_cCodigo: storage.GetStorage("Emp_cCodigo") }
+    let _body = { Accion: "BUSCARTODOS_SUBASTA", Emp_cCodigo: storage.GetStorage("Emp_cCodigo") }
     setLoading(true);
     return await eventoService.obtenerEventosCabAuth(_body).then(
       (res) => {
