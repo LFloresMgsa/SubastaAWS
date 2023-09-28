@@ -7,7 +7,9 @@ export const general = {
 
 
  function convertirFechaTextToIsoText(fecha) {
-    // Dividir la fecha en día, mes y año
+
+
+  // Dividir la fecha en día, mes y año
     var partes = fecha.split("/");
     var dia = partes[0];
     var mes = partes[1];

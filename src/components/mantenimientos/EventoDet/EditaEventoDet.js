@@ -49,6 +49,9 @@ const EditaEventoDet = (props) => {
             let _result;
             let _body = { Accion: "BUSCARREGISTRO", Emp_cCodigo: Emp_cCodigo, Pan_cAnio: Pan_cAnio, Per_cPeriodo: Per_cPeriodo, Dvm_cNummov: Dvm_cNummov, Cab_cCatalogo: Cab_cCatalogo }
 
+console.log(_body);
+
+
             await eventoService.obtenerEventosDetAuth(_body).then(
                 (res) => {
                     setData(res[0]);

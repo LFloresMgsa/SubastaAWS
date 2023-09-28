@@ -29,6 +29,7 @@ import CustomAlert from '../mensajes/CustomAlert';
 
 import { storage } from "../../storage.js";
 import { format } from 'date-fns';
+import { CropLandscapeOutlined } from '@mui/icons-material';
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -81,7 +82,6 @@ NumberFormatCustom.propTypes = {
     name: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
 };
-
 
 
 const ItemContacto = (props) => {
@@ -176,11 +176,13 @@ const ItemContacto = (props) => {
             let _result;
             let _fecha;
 
+
             await eventoService.obtenerEventosDet(_body).then(
                 (res) => {
                     _result = res[0];
                 },
                 (error) => {
+
                     console.log(error);
                 }
             );
@@ -208,14 +210,45 @@ const ItemContacto = (props) => {
 
             return await eventoService.horaservidor(_body).then(
                 (res) => {
-                    const timeString = res.time;
-                    const [hours, minutes, seconds] = timeString.split(':');
-                    const date = new Date();
-                    date.setHours(hours);
-                    date.setMinutes(minutes);
-                    date.setSeconds(seconds);
 
-                    return format(date, 'yyyy-MM-dd HH:mm:ss');;
+
+                    //const timeString = res.time;
+
+                    // const [hours, minutes, seconds] = timeString.split(':');
+                    // const date = new Date();
+                    // date.setHours(hours);
+                    // date.setMinutes(minutes);
+                    // date.setSeconds(seconds);
+
+                    // JSON de entrada
+
+                    // Parsea el campo "body" del JSON
+                    var bodyObj = JSON.parse(res.body);
+
+
+                    // Parsea la fecha en el JSON
+                    var fecha = new Date(bodyObj.time);
+
+
+                    var year = fecha.getFullYear();
+                    var month = String(fecha.getMonth() + 1).padStart(2, '0'); // Suma 1 al mes porque los meses en JavaScript comienzan desde 0
+                    var day = String(fecha.getDate()).padStart(2, '0');
+                    var hours = String(fecha.getHours()).padStart(2, '0');
+                    var minutes = String(fecha.getMinutes()).padStart(2, '0');
+                    var seconds = String(fecha.getSeconds()).padStart(2, '0');
+
+                    // Formatea la fecha en el formato deseado
+                    var fechaFormateada = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+
+
+
+
+                    console.log('----------------');
+                    console.log(fechaFormateada);
+                    console.log('----------------');
+
+
+                    return fechaFormateada;//format(res.time, 'yyyy-MM-dd HH:mm:ss');
                 },
                 (error) => {
                     return null;
@@ -230,16 +263,20 @@ const ItemContacto = (props) => {
     };
 
 
+    
     const EsValidoHorarioPuja = async () => {
         try {
             let _fechaDetalle = await obtenerFechaHoraPujaDetalle(props.pCab_cCatalogo, props.pDvm_cNummov);
 
             let _fechaServidor = await fetchServerTime();
 
-            _HoraDetalleEventoItem=_fechaDetalle;
-            _HoraDetalleServidor=_fechaServidor;
-            //console.log(_fechaDetalle);
-            //console.log(_fechaServidor);
+
+
+            _HoraDetalleEventoItem = _fechaDetalle;
+            _HoraDetalleServidor = _fechaServidor;
+
+            console.log(_fechaDetalle);
+            console.log(_fechaServidor);
 
             if (_fechaServidor <= _fechaDetalle) {
                 //console.log('true');
@@ -271,7 +308,7 @@ const ItemContacto = (props) => {
     //#region Alerta de confirmacion
 
 
-    
+
     const handleActualizaSubasta = async () => {
         await obtenerPujasDetalle(props.pCab_cCatalogo, props.pDvm_cNummov);
     };
@@ -297,7 +334,7 @@ const ItemContacto = (props) => {
         let _respuestaHorario = await EsValidoHorarioPuja();
 
 
-        if ( _respuestaHorario == false) { _mensaje = "La puja esta CERRADA , Día y Hora de cierre: " + _HoraDetalleEventoItem    } 
+        if (_respuestaHorario == false) { _mensaje = "La puja esta CERRADA , Día y Hora de cierre: " + _HoraDetalleEventoItem }
 
         //console.log(_mensaje);
 
@@ -549,6 +586,6 @@ const ItemContacto = (props) => {
 
         </div >
     );
-}; 
+};
 
 export default ItemContacto;

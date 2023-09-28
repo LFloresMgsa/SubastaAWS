@@ -82,16 +82,30 @@ const EditaEvento = (props) => {
     // procedimiento para EDITAR un catalogo con SP MySQL
     const editarEvento = async (e) => {
         try {
-            let pDvm_dInicio = general.convertirFechaTextToIsoText(Dvm_dInicio);
-            let pDvm_dFin = general.convertirFechaTextToIsoText(Dvm_dFin);
+            let pDvm_dInicio = Dvm_dInicio;  //general.convertirFechaTextToIsoText(Dvm_dInicio);
+            let pDvm_dFin = Dvm_dFin; //general.convertirFechaTextToIsoText(Dvm_dFin);
+
+
+            // console.log('-------------------');
+            // console.log(Dvm_dInicio);
+            // console.log(pDvm_dInicio);
+            // console.log('-------------------');
 
             let _body = {
-                Accion: "EDITAR", Emp_cCodigo: Emp_cCodigo, Pan_cAnio: Pan_cAnio, Per_cPeriodo: Per_cPeriodo, Dvm_cNummov: Dvm_cNummov,
-                Vtt_cTipoEvento: Vtt_cTipoEvento, Dvm_cDescripcion: Dvm_cDescripcion, Dvm_dInicio: pDvm_dInicio, Dvm_dFin: pDvm_dFin,
-                Dvm_cEstado: Dvm_cEstado, Dvm_cDescripcionSec: Dvm_cDescripcionSec, Dvm_nTopeImporte: Dvm_nTopeImporte, Dvm_nTopeDias: Dvm_nTopeDias
+                Accion: "EDITAR", Emp_cCodigo: Emp_cCodigo, 
+                Pan_cAnio: Pan_cAnio, 
+                Per_cPeriodo: Per_cPeriodo, 
+                Dvm_cNummov: Dvm_cNummov,
+                Vtt_cTipoEvento: Vtt_cTipoEvento, 
+                Dvm_cDescripcion: Dvm_cDescripcion, 
+                Dvm_dInicio: pDvm_dInicio, Dvm_dFin: pDvm_dFin,
+                Dvm_cEstado: Dvm_cEstado, 
+                Dvm_cDescripcionSec: Dvm_cDescripcionSec, 
+                Dvm_nTopeImporte: Dvm_nTopeImporte, 
+                Dvm_nTopeDias: Dvm_nTopeDias
             }
 
-            console.log(_body);
+            
 
             await eventoService.obtenerEventosCabAuth(_body).then(
                 (res) => {
