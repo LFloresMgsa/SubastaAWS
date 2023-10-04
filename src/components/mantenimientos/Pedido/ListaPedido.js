@@ -19,14 +19,19 @@ import { FormControl, InputLabel, Select, MenuItem, TextField } from '@material-
 const TAX_RATE = 0.18;
 
 function totalPedido(items) {
+  try {
+    if (items) {
 
-  if (items) {
+      let ntotal = items.map(({ Pdd_nPrecioNeto }) => Pdd_nPrecioNeto).reduce((sum, i) => sum + i, 0);
 
-    let ntotal = items.map(({ Pdd_nPrecioNeto }) => Pdd_nPrecioNeto).reduce((sum, i) => sum + i, 0);
+      return ntotal;
+    }
+    else {
+      return 0;
+    }
 
-    return ntotal;
   }
-  else {
+  catch {
     return 0;
   }
 
@@ -138,28 +143,37 @@ const CabeceraDetalle = (props) => {
 
   function FiltraCab() {
 
-    let pPdm_cNummov = "";
+    try {
+      let pPdm_cNummov = "";
 
-    if (selectedRow) {
-      pPdm_cNummov = selectedRow[0].Pdm_cNummov;
+      if (selectedRow) {
+        pPdm_cNummov = selectedRow[0].Pdm_cNummov;
 
+      }
+      let rowCabSel = data.filter(_temps => _temps.Pdm_cNummov == pPdm_cNummov);
+
+      return rowCabSel[0];
     }
-    let rowCabSel = data.filter(_temps => _temps.Pdm_cNummov == pPdm_cNummov);
-
-    return rowCabSel[0];
+    catch (error) {
+      console.log(error);
+    }
   }
 
   const actualizar = async () => {
+    try {
+      await actualizaEstado();
+      let nunmmov = "";
 
-    await actualizaEstado();
-    let nunmmov = "";
+      if (_RowSelCab) {
+        nunmmov = _RowSelCab.Pdm_cNummov;
+      }
+      await obtenerEstadoLog(nunmmov);
+      setComentarioUser('');
 
-    if (_RowSelCab) {
-      nunmmov = _RowSelCab.Pdm_cNummov;
+
+    } catch (error) {
+      console.log(error);
     }
-    await obtenerEstadoLog(nunmmov);
-    setComentarioUser('');
-
   }
 
   const actualizaEstado = async () => {
@@ -191,64 +205,88 @@ const CabeceraDetalle = (props) => {
 
   const obtenerEstadoLog = async (pPdm_cNummov) => {
 
-    let _body = { Accion: "BUSCARTODOS", Emp_cCodigo: storage.GetStorage("Emp_cCodigo"), Pan_cAnio: storage.GetStorage("Pan_cAnio"), Pdm_cNummov: pPdm_cNummov }
+    try {
+      let _body = { Accion: "BUSCARTODOS", Emp_cCodigo: storage.GetStorage("Emp_cCodigo"), Pan_cAnio: storage.GetStorage("Pan_cAnio"), Pdm_cNummov: pPdm_cNummov }
 
-    return await eventoService.actualizaPedidoAuth(_body).then(
-      (res) => {
-        setDataLog(res[0]);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+      return await eventoService.actualizaPedidoAuth(_body).then(
+        (res) => {
+          setDataLog(res[0]);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleRowClickCab = async (param) => {
-    let pPdm_cNummov = Derecha(param[0], 10);
+    try {
+      let pPdm_cNummov = Derecha(param[0], 10);
 
-    await listarDetalle(pPdm_cNummov);
+      await listarDetalle(pPdm_cNummov);
 
-    if (_RowSelCab) {
-      setEstado(_RowSelCab.Pdm_cEstado);
+      if (_RowSelCab) {
+        setEstado(_RowSelCab.Pdm_cEstado);
+      }
+
+    //  await obtenerEstadoLog(pPdm_cNummov);
+      
+
+    } catch (error) {
+      console.log(error);
     }
 
-    await obtenerEstadoLog(pPdm_cNummov);
-    //setEstado(Pdm_cEstado[0].Pdm_cEstado); 
 
   };
 
   // procedimiento para CONSULTA un catalogo con SP MySQL
   const listarCabecera = async () => {
-    let _body = { Accion: "BUSCARTODOS", Emp_cCodigo: storage.GetStorage("Emp_cCodigo"), Pan_cAnio: storage.GetStorage("Pan_cAnio") }
+    try {
+      let _body = { Accion: "BUSCARTODOS", Emp_cCodigo: storage.GetStorage("Emp_cCodigo"), Pan_cAnio: storage.GetStorage("Pan_cAnio") }
 
-    return await eventoService.obtenerPedidoCabAuth(_body).then(
-      (res) => {
+      return await eventoService.obtenerPedidoCabAuth(_body).then(
+        (res) => {
 
-        setData(res[0]);
+          setData(res[0]);
 
-      },
-      (error) => {
-        console.log(error);
+        },
+        (error) => {
+          console.log(error);
 
-      }
-    );
+        }
+      );
+
+    } catch (error) {
+      console.log(error);
+    }
   };
 
 
   const listarDetalle = async (pPdm_cNummov) => {
-    let _body = { Accion: "BUSCARTODOS", Emp_cCodigo: storage.GetStorage("Emp_cCodigo"), Pan_cAnio: storage.GetStorage("Pan_cAnio"), Pdm_cNummov: pPdm_cNummov }
+    
+    try {
+      let _body = { Accion: "BUSCARTODOS", Emp_cCodigo: storage.GetStorage("Emp_cCodigo"), Pan_cAnio: storage.GetStorage("Pan_cAnio"), Pdm_cNummov: pPdm_cNummov }
 
-    return await eventoService.obtenerPedidoDetAuth(_body).then(
-      (res) => {
-        setSelectedRow(res[0]);
-        setInvoiceTotal(totalPedido(res[0]));
+      return await eventoService.obtenerPedidoDetAuth(_body).then(
+        (res) => {
+          setSelectedRow(res[0]);
+          setInvoiceTotal(totalPedido(res[0]));
 
-      },
-      (error) => {
-        console.log(error);
+        //   obtenerEstadoLog(pPdm_cNummov);
+        },
+        (error) => {
+          console.log(error);
 
-      }
-    );
+        }
+      );
+
+    } catch (error) {
+      console.log(error);
+    }
+
   };
 
   useEffect(() => {
@@ -256,7 +294,14 @@ const CabeceraDetalle = (props) => {
   }, []);
 
   const getRowId = (row) => {
-    return `${row.Emp_cCodigo}-${row.Pan_cAnio}-${row.Pdm_cNummov}`;
+    try {
+      return `${row.Emp_cCodigo}-${row.Pan_cAnio}-${row.Pdm_cNummov}`;
+    } catch (error) {
+      console.log(error);
+      return '';
+    }
+
+
   };
 
   return (
